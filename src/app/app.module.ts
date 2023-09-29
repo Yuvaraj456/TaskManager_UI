@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 
 @NgModule({
-  declarations: [
+  declarations: [ //all component which is belongs to the current module
     AppComponent,  
   ],
   imports: [
@@ -14,7 +14,7 @@ import { AdminModule } from './admin/admin.module';
     AppRoutingModule,
     AdminModule //child module
   ],
-  providers: [],
+  providers: [],//for service import
   bootstrap: [AppComponent] //only root module only contain bootstrap
 })
 export class AppModule { } //root Module or parent module

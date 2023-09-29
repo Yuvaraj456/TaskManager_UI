@@ -21,6 +21,6 @@ import { DashboardService } from '../dashboard.service';
     AboutComponent,
     MyProfileComponent
   ],
-  providers:[DashboardService]
+  providers:[DashboardService]//for service import
 })
 export class AdminModule { }
