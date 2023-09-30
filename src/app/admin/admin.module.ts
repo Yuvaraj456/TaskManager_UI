@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
-import { DashboardService } from '../dashboard.service';
+import { DashboardService } from '../services/dashboard.service';
+import { ProjectsComponent } from './projects/projects.component';
+import { ProjectsService } from '../services/projects.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,16 +15,20 @@ import { DashboardService } from '../dashboard.service';
   declarations: [
     DashboardComponent,
     AboutComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ProjectsComponent
   ],
-  imports: [
-    CommonModule
+  imports: [ //all imports are Module
+    CommonModule,
+    HttpClientModule,
+    FormsModule
   ],
-  exports:[
+  exports:[ //all exports are component
     DashboardComponent,
     AboutComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ProjectsComponent
   ],
-  providers:[DashboardService]//for service import
+  providers:[DashboardService, ProjectsService]//for service import
 })
 export class AdminModule { }
