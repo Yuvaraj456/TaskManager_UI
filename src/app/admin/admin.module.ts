@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AboutComponent } from './about/about.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
@@ -29,6 +29,6 @@ import { FormsModule } from '@angular/forms';
     MyProfileComponent,
     ProjectsComponent
   ],
-  providers:[DashboardService, ProjectsService]//for service import
+  providers:[DashboardService, ProjectsService, DatePipe]//for service import
 })
 export class AdminModule { }
