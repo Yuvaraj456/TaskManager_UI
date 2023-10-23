@@ -1,0 +1,36 @@
+<form>
+    <div class="row">
+        <div class="col-lg-6 col-xl-5 col-md-9 mx-auto">
+            <div class="card mt-4">
+                <div class="card-header bg-secondary text-white">
+                    <h3>Login</h3>
+                </div>
+                <div class="card-body">
+                    <!--UserName-->
+                    <div class="form-group form-row">
+                        <label for="UserName" class="col-md-4 col-form-label">UserName</label>
+                        <div class="col-md-8">
+                            <input type="text" id="UserName" name="userName" class="form-control" [(ngModel)]="loginViewModel.userName"
+                            autofocus="autofocus" placeholder="UserName">
+                        </div>
+                    </div>
+
+                    <!--Password-->
+                    <div class="form-group form-row">
+                        <label for="password" class="col-md-4 col-form-label">Password</label>
+                        <div class="col-md-8">
+                            <input type="password" id="password" name="password" class="form-control" [(ngModel)]="loginViewModel.password"
+                           placeholder="Password">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer text-right">
+                    <span class="text-danger">{{loginError}}</span>
+                    <button class="btn btn-primary" (click)="onLoginClick($event)">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

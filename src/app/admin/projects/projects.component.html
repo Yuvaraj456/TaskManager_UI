@@ -43,7 +43,7 @@
                         <tr *ngFor="let Project of projects; let i=index">
                             <td>{{Project.projectId}}</td>
                             <td>{{Project.projectName}}</td>
-                            <td>{{Project.dateOfStart}}</td>
+                            <td>{{Project.dateOfStart|date:'dd-MM-yyyy'}}</td>
                             <td>{{Project.teamSize}}</td>
                             <td>
                                 <button class="btn btn-warning me-2" (click)="onEditClick($event,i)" data-toggle="modal"
@@ -135,7 +135,7 @@
                     <div class="form-group row">
                         <label for="txtEditDateOfStart" class="col-sm-4 col-form-label">Date Of Start</label>
                         <div class="col-sm-8">
-                            <input type="date" id="txtEditDateOfStart" name="dateOfStart" style="width:150px"
+                            <input type="datetime-local" id="txtEditDateOfStart" name="dateOfStart" style="width:150px"
                                 class="form-control" placeholder="Date Of Start" [(ngModel)]="editProject.dateOfStart">
                         </div>
                     </div>

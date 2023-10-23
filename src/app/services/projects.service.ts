@@ -16,10 +16,10 @@ export class ProjectsService {
   getAllProjects():Observable<Project[]>{    
     return this.httpClient.get<Project[]>('https://localhost:7015/api/Projects/get',{responseType:"json"})
     .pipe(map((data:Project[]) => {
-      for(let i=0; i< data.length; i++)
-      {
-        data[i].dateOfStart=this.datePipe.transform(data[i].dateOfStart, "dd/MM/yyyy");
-      }
+      // for(let i=0; i< data.length; i++)
+      // {
+      //   data[i].dateOfStart = (this.datePipe.transform(data[i].dateOfStart, "dd-MM-yyyy"));
+      // }
       return data;
       }));
   }
@@ -32,7 +32,7 @@ export class ProjectsService {
     return this.httpClient.put<Project>("https://localhost:7015/api/Projects/put", project, {responseType:"json"})
   }
 
-  deleteProjects(projectId:number):Observable<string>{
+  deleteProjects(projectId:number | null):Observable<string>{
     return this.httpClient.delete<string>(`https://localhost:7015/api/Projects/delete?id=${projectId}`)
   }
 

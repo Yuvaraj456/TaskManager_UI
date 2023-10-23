@@ -52,13 +52,13 @@
             <div class="col-12 pt-0 pb-2" style="background-color: #e9e6e6;">
                 <div class="row mt-2">
                     <div class="col-6 text-left">
-                        <div class="dropdown">
+                        <div class="dropdown" >
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown">
-                                Project A
+                             data-toggle="dropdown">
+                            Project A
                             </button>
                             <div class="dropdown-menu">
-                                <div class="dropdown-item" href="#" *ngFor="let project of Projects"
+                                <div class="dropdown-item" href="#" *ngFor="let project of Projects" 
                                     (click)="onProjectChange($event)">{{project}}</div>
                             </div>
                         </div>

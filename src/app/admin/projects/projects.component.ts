@@ -46,8 +46,8 @@ export class ProjectsComponent implements OnInit {
 
         //Clear New Project Dialog - TextBoxes
         this.newProject.projectId = null;
-        this.newProject.projectName = "";
-        this.newProject.dateOfStart = "";
+        this.newProject.projectName = null;
+        this.newProject.dateOfStart = null;
         this.newProject.teamSize = null;
 
       },
