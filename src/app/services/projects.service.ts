@@ -13,8 +13,13 @@ export class ProjectsService {
 
   }
 
-  getAllProjects():Observable<Project[]>{    
-    return this.httpClient.get<Project[]>('https://localhost:7015/api/Projects/get',{responseType:"json"})
+  getAllProjects():Observable<Project[]>{ 
+    // var header = new HttpHeaders();    
+    // if(sessionStorage["token"] != null)
+    // {
+    //   header = header.append("Authorization","Bearer "+sessionStorage.getItem("token"));   
+    // }
+    return this.httpClient.get<Project[]>('https://localhost:7015/api/Projects/get',{ responseType:"json"},) //headers:header,
     .pipe(map((data:Project[]) => {
       // for(let i=0; i< data.length; i++)
       // {
@@ -25,18 +30,37 @@ export class ProjectsService {
   }
 
   postProjects(project:Project):Observable<Project>{
+    // let header = new HttpHeaders();
+    // if(sessionStorage.getItem("token") != null)
+    // {
+    //   header = header.append("Authorization","Bearer "+sessionStorage.getItem("token"));   
+    // }
     return this.httpClient.post<Project>("https://localhost:7015/api/Projects/post",project,{responseType:"json"})
   }
 
   updateProjects(project:Project):Observable<Project>{
+    // let header = new HttpHeaders();
+    // if(sessionStorage.getItem("token") != null)
+    // {
+    //   header = header.append("Authorization","Bearer "+sessionStorage.getItem("token"));   
+    // }
     return this.httpClient.put<Project>("https://localhost:7015/api/Projects/put", project, {responseType:"json"})
   }
 
   deleteProjects(projectId:number | null):Observable<string>{
+    // let header = new HttpHeaders();
+    // if(sessionStorage.getItem("token") != null)
+    // {
+    //   header = header.append("Authorization","Bearer "+sessionStorage.getItem("token"));   
+    // }
     return this.httpClient.delete<string>(`https://localhost:7015/api/Projects/delete?id=${projectId}`)
   }
-
   searchProjects(searchBy:string,searchSring:string):Observable<Project[]>{
+    // let header = new HttpHeaders();
+    // if(sessionStorage.getItem("token") != null)
+    // {
+    //   header = header.append("Authorization","Bearer "+sessionStorage.getItem("token"));   
+    // }
     return this.httpClient.get<Project[]>(`https://localhost:7015/api/Projects/search/${searchBy}/${searchSring}`,{responseType:"json"})
   }
 }

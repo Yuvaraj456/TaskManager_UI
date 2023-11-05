@@ -24,10 +24,13 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectService.getAllProjects().subscribe(
-      (response:Project[])=> {this.projects = response}
-
-    );
+    this.projectService.getAllProjects().subscribe({
+      next:(response:Project[])=> {this.projects = response},
+      error:(error:any)=>{
+        console.log(error);
+        alert("Authentication Failed");
+      }
+  });
     
     
 

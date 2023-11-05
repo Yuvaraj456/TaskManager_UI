@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit{
   onLoginClick(event:any){
     console.log(this.loginViewModel);
     this.loginService.login(this.loginViewModel).subscribe({
-      next:(response:any)=>{
-        
+      next:(response:any)=>{        
+        sessionStorage.setItem("token",response.token);
         this.router.navigateByUrl("/dashboard");
       },
       error:(err)=>{
@@ -38,5 +38,7 @@ export class LoginComponent implements OnInit{
 
     });
   }
+
+
 
 }
