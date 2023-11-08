@@ -23,8 +23,9 @@ import { JwtModule } from '@auth0/angular-jwt';
     JwtModule.forRoot({
       config:{
         tokenGetter:()=>{
-          return sessionStorage.getItem("token")? sessionStorage["token"]: null;
+          return sessionStorage.getItem("token");
         }
+       
       }
     })
   ],
@@ -39,6 +40,9 @@ import { JwtModule } from '@auth0/angular-jwt';
       useClass:JwtUnAuthorizedInterceptorService,
       multi:true
     }
+    
+
+    
   ],//for service import
   bootstrap: [AppComponent] //only root module only contain bootstrap
 })

@@ -36,7 +36,6 @@ export class LoginService {
 
    public isAuthenticated() : boolean
    {
-      var token = sessionStorage.getItem("token") ? sessionStorage.getItem("token") : null;
 
       if(this.jwtHelperService.isTokenExpired())
       {

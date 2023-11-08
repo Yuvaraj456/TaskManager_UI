@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from './services/login.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,13 @@ import { LoginService } from './services/login.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  
-  constructor(public loginService:LoginService){
+  title = "hello"
+  //myProperty = this.domSanitizer.bypassSecurityTrustHtml("");
+  //myProperty = this.domSanitizer.bypassSecurityTrustUrl("https://google.com");
+  constructor(public loginService:LoginService, private domSanitizer:DomSanitizer){
 
 
   }
+  
 
 }

@@ -7,8 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { CanActivateGuardService } from './services/can-activate-guard.service';
 
 const routes: Routes = [
-  {path:"projects",component:ProjectsComponent,canActivate:[CanActivateGuardService]},
-  {path:"dashboard",component:DashboardComponent, canActivate:[CanActivateGuardService]},
+  {path:"projects",component:ProjectsComponent,canActivate:[CanActivateGuardService],data:{expectedRole:["Admin"]}},
+  {path:"dashboard",component:DashboardComponent, canActivate:[CanActivateGuardService], data:{expectedRole:["Admin","Employee"]} },
   {path:"about",component:AboutComponent},
   {path:"login",component:LoginComponent},
   {path:"",redirectTo:"login",pathMatch:'full'} 

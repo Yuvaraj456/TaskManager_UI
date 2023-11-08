@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientLocation } from 'src/app/models/client-location';
 import { Project } from 'src/app/models/project';
+import { ClientLocationService } from 'src/app/services/client-location.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
@@ -15,24 +17,36 @@ export class ProjectsComponent implements OnInit {
    editIndex:any = null;
    deleteProject:Project = new Project();
    deleteIndex:any=null;
+   clientLocation:ClientLocation[] =[];
+   showLoading:boolean=true;
 
    searchBy:string = "ProjectId";
    searchString:string = "";
 
-  constructor(private projectService:ProjectsService){
+  constructor(private projectService:ProjectsService, private clientLocationService:ClientLocationService){
 
   }
 
   ngOnInit(): void {
     this.projectService.getAllProjects().subscribe({
-      next:(response:Project[])=> {this.projects = response},
+      next:(response:Project[])=> {
+        this.projects = response
+        this.showLoading=false;
+      },
       error:(error:any)=>{
         console.log(error);
         alert("Authentication Failed");
       }
   });
     
-    
+ this.clientLocationService.getClientLocations().subscribe({
+  next:(response:ClientLocation[])=>{
+    this.clientLocation = response;
+  },
+  error:(err)=>{console.log(err)},
+  complete:()=>{},
+ });
+
 
   }
 
@@ -45,6 +59,10 @@ export class ProjectsComponent implements OnInit {
         p.projectName = response.projectName;
         p.dateOfStart = response.dateOfStart;
         p.teamSize = response.teamSize;
+        p.active = response.active;
+        p.status = response.status;
+        p.clientLocationId=response.clientLocationId;
+        p.clientLocation=response.clientLocation;
         this.projects.push(p);
 
         //Clear New Project Dialog - TextBoxes
@@ -52,7 +70,9 @@ export class ProjectsComponent implements OnInit {
         this.newProject.projectName = null;
         this.newProject.dateOfStart = null;
         this.newProject.teamSize = null;
-
+        this.newProject.active=null;
+        this.newProject.status=null;
+        this.newProject.clientLocationId=null;
       },
       error:(error:any)=>{console.log(error);},
       complete:()=>{}
@@ -65,6 +85,10 @@ export class ProjectsComponent implements OnInit {
     this.editProject.projectName = this.projects[index].projectName;
     this.editProject.dateOfStart = this.projects[index].dateOfStart;
     this.editProject.teamSize = this.projects[index].teamSize;
+    this.editProject.status = this.projects[index].status;
+    this.editProject.active = this.projects[index].active;
+    this.editProject.clientLocationId = this.projects[index].clientLocationId;
+    this.editProject.clientLocation = this.projects[index].clientLocation;
     this.editIndex = index;
   }
 
@@ -77,13 +101,20 @@ export class ProjectsComponent implements OnInit {
         p.projectName = response.projectName;
         p.dateOfStart = response.dateOfStart;
         p.teamSize = response.teamSize;
+        p.active = response.active;
+        p.status = response.status;
+        p.clientLocation = response.clientLocation;
+        p.clientLocationId = response.clientLocationId;
         this.projects[this.editIndex]=p;
 
         this.editProject.projectId = null;
         this.editProject.projectName = null
         this.editProject.dateOfStart = null
         this.editProject.teamSize = null;
-
+        this.editProject.status = null;
+        this.editProject.active = null
+        this.editProject.clientLocationId = null
+        this.editIndex.clientLocation = null;
       },
       error:(error:any)=>{ console.log(error)},
       complete:()=>{}
