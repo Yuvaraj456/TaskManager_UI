@@ -8,6 +8,9 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ProjectsService } from '../services/projects.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { TeamSizeValidatorDirective } from '../directives/team-size-validator.directive';
+import { ClientLocationStatusValidatorDirective } from '../directives/client-location-status-validator.directive';
+import { ProjectidUniqueValidatorDirective } from '../directives/projectid-unique-validator.directive';
 
 
 
@@ -16,7 +19,10 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     AboutComponent,
     MyProfileComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    TeamSizeValidatorDirective,
+    ClientLocationStatusValidatorDirective,
+    ProjectidUniqueValidatorDirective
   ],
   imports: [ //all imports are Module
     CommonModule,
@@ -27,7 +33,10 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     AboutComponent,
     MyProfileComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ClientLocationStatusValidatorDirective,
+    TeamSizeValidatorDirective,
+    ProjectidUniqueValidatorDirective
   ],
   providers:[DashboardService, ProjectsService, DatePipe]//for service import
 })

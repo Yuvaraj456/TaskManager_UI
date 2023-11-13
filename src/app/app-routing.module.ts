@@ -5,13 +5,15 @@ import { AboutComponent } from './admin/about/about.component';
 import { ProjectsComponent } from './admin/projects/projects.component';
 import { LoginComponent } from './login/login.component';
 import { CanActivateGuardService } from './services/can-activate-guard.service';
+import { SignupComponent } from './componets/signup/signup.component';
 
 const routes: Routes = [
   {path:"projects",component:ProjectsComponent,canActivate:[CanActivateGuardService],data:{expectedRole:["Admin"]}},
   {path:"dashboard",component:DashboardComponent, canActivate:[CanActivateGuardService], data:{expectedRole:["Admin","Employee"]} },
   {path:"about",component:AboutComponent},
   {path:"login",component:LoginComponent},
-  {path:"",redirectTo:"login",pathMatch:'full'} 
+  {path:"",redirectTo:"login",pathMatch:'full'}, 
+  {path:"signup",component:SignupComponent}
     
 ];
 

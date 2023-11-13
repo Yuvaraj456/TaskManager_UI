@@ -4,15 +4,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptorService } from './services/jwt-interceptor.service';
 import { JwtUnAuthorizedInterceptorService } from './services/jwt-un-authorized-interceptor.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SignupComponent } from './componets/signup/signup.component';
+
 
 @NgModule({
   declarations: [ //all component which is belongs to the current module
-    AppComponent, LoginComponent, 
+    AppComponent, LoginComponent, SignupComponent 
   ],
   imports: [
     BrowserModule,
@@ -20,6 +22,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     FormsModule,
     HttpClientModule,
     AdminModule, //child module
+    ReactiveFormsModule,
     JwtModule.forRoot({
       config:{
         tokenGetter:()=>{

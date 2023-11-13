@@ -14,7 +14,7 @@ export class ClientLocationService {
 
   getClientLocations():Observable<ClientLocation[]>
   {
-    return this.httpClient.get<ClientLocation[]>(`https://localhost:7015/ClientLocation/get`,{responseType:'json'});
+    return this.httpClient.get<ClientLocation[]>(`https://localhost:7015/api/ClientLocation/get`,{responseType:'json'});
   }
 
 

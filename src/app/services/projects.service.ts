@@ -21,9 +21,10 @@ export class ProjectsService {
     // }
     return this.httpClient.get<Project[]>('https://localhost:7015/api/Projects/get',{ responseType:"json"},) //headers:header,
     .pipe(map((data:Project[]) => {
+
       // for(let i=0; i< data.length; i++)
       // {
-      //   data[i].dateOfStart = (this.datePipe.transform(data[i].dateOfStart, "dd-MM-yyyy"));
+      //   data[i].dateOfStart = this.datePipe.transform(data[i].dateOfStart, "dd-MM-yyyy") as Date|null;
       // }
       return data;
       }));
@@ -62,5 +63,10 @@ export class ProjectsService {
     //   header = header.append("Authorization","Bearer "+sessionStorage.getItem("token"));   
     // }
     return this.httpClient.get<Project[]>(`https://localhost:7015/api/Projects/search/${searchBy}/${searchSring}`,{responseType:"json"})
+  }
+
+  getProjectByProjectId(projectId:number):Observable<Project>
+  {
+    return this.httpClient.get<Project>(`https://localhost:7015/api/Projects/getprojectbyprojectid/${projectId}`,{responseType:"json"});
   }
 }
