@@ -24,6 +24,11 @@ export class JwtUnAuthorizedInterceptorService implements HttpInterceptor {
             console.log(error);
             alert("401 UnAuthorized");
           }
+          else if(error.status == 500)
+          {
+            console.log(error);
+            alert("500 Internal Server Error");
+          }
         }
       }
     ));

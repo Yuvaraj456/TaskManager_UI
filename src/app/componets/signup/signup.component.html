@@ -1,50 +1,243 @@
-<div class="row">'
-    <div class="col-md-8 col-xl-6 mx-auto">
-        <div class="card mt-1">
-            <div class="card-header">
-                <h4>Sign Up</h4>
-            </div>
-            <div class="card-body">
-                <form [formGroup]="signUpForm">
+<div class="row">
+    <div class="col-md-8 col-xl-6 col mx-auto">
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmitClick()">
+            <div class="card mt-1">
+                <div class="card-header">
+                    <h4>Sign Up</h4>
+                </div>
+                <div class="card-body">
+
                     <!--First Name-->
-                    <div class="form-group form-row">
-                        <label for="firstName" class="col-md-4 col-form-label">First Name:</label>
-                        <div class="col-md-8">
-                            <input type="text" name="firstName" formControlName="firstName" id="firstName" placeholder="First Name" class="form-contol">
+                    <div class="form-group form-row" formGroupName="personName">
+                        <label for="firstName" class="col-md-3 col-form-label">First Name:</label>
+                        <div class="col-md-9">
+                            <input type="text" name="firstName" formControlName="firstName" id="firstName"
+                                placeholder="First Name" class="form-control"
+                                [ngClass]="{'is-valid':signUp_firstNameControl?.valid 
+                                && (signUp_firstNameControl?.dirty || signUp_firstNameControl?.touched || isSignUpFormSubmitted),
+                                'is-invalid':signUp_firstNameControl?.invalid 
+                                && (signUp_firstNameControl?.dirty || signUp_firstNameControl?.touched || isSignUpFormSubmitted)}">
+                            <span class="text-danger"
+                                *ngIf="signUp_firstNameControl?.errors?.['required'] && 
+                            (signUp_firstNameControl?.dirty || signUp_firstNameControl?.touched || isSignUpFormSubmitted)">FirstName can't be
+                                blank</span>
+                            <span class="text-danger"
+                                *ngIf="signUp_firstNameControl?.errors?.['minlength'] && 
+                            (signUp_firstNameControl?.dirty || signUp_firstNameControl?.touched || isSignUpFormSubmitted)">FirstName should
+                                contain atleast 2 character</span>
                         </div>
                     </div>
                     <!--Last Name-->
-                    <div class="form-group form-row">
-                        <label for="lastName" class="col-md-4 col-form-label">Last Name:</label>
-                        <div class="col-md-8">
-                            <input type="text" name="lastName" formControlName="lastName" id="lastName" placeholder="Last Name" class="form-contol">
+                    <div class="form-group form-row" formGroupName="personName">
+                        <label for="lastName" class="col-md-3 col-form-label">Last Name:</label>
+                        <div class="col-md-9">
+                            <input type="text" name="lastName" formControlName="lastName" id="lastName"
+                                placeholder="Last Name" class="form-control"
+                                [ngClass]="{'is-valid':signUp_lastNameControl?.valid 
+                                && (signUp_lastNameControl?.dirty || signUp_lastNameControl?.touched || isSignUpFormSubmitted),
+                                'is-invalid':signUp_lastNameControl?.invalid 
+                                && (signUp_lastNameControl?.dirty || signUp_lastNameControl?.touched || isSignUpFormSubmitted)}">
+                            <span class="text-danger" *ngIf="signUp_lastNameControl?.errors?.['required'] && (signUp_lastNameControl?.dirty 
+                           || signUp_lastNameControl?.touched || isSignUpFormSubmitted)">LastName can't be blank</span>
+                            <span class="text-danger"
+                                *ngIf="signUp_lastNameControl?.errors?.['minlength'] && 
+                           (signUp_lastNameControl?.dirty || signUp_lastNameControl?.touched || isSignUpFormSubmitted)">LastName should
+                                contain atleast 2 character</span>
                         </div>
                     </div>
                     <!--Email-->
                     <div class="form-group form-row">
-                        <label for="email" class="col-md-4 col-form-label">Email:</label>
-                        <div class="col-md-8">
-                            <input type="text" name="email" id="email" formControlName="email" placeholder="Email Id" class="form-contol">
+                        <label for="email" class="col-md-3 col-form-label">Email:</label>
+                        <div class="col-md-9">
+                            <input type="text" name="email" id="email" formControlName="email" placeholder="Email Id"
+                                class="form-control" [ngClass]="{'is-valid':signUp_emailControl.valid 
+                                && (signUp_emailControl.dirty || signUp_emailControl.touched || isSignUpFormSubmitted),
+                                'is-invalid':signUp_emailControl.invalid && (signUp_emailControl.dirty || 
+                                signUp_emailControl.touched || isSignUpFormSubmitted)}">
+                            <span class="text-danger" *ngIf="signUp_emailControl?.errors?.['required'] && (signUp_emailControl?.dirty 
+                                 || signUp_emailControl?.touched || isSignUpFormSubmitted)">Email can't be blank</span>
+                            <span class="text-danger"
+                                *ngIf="signUp_emailControl?.errors?.['email'] && 
+                                 (signUp_emailControl?.dirty || signUp_emailControl?.touched || isSignUpFormSubmitted)">Please enter valid
+                                email</span>
+                            <span class="text-danger"
+                                *ngIf="signUp_emailControl?.errors?.['uniqueEmail'] && 
+                                 (signUp_emailControl?.dirty || signUp_emailControl?.touched || isSignUpFormSubmitted)">Entered Email Id is already exist</span>
                         </div>
                     </div>
                     <!--Mobile-->
                     <div class="form-group form-row">
-                        <label for="mobile" class="col-md-4 col-form-label">Mobile:</label>
-                        <div class="col-md-8">
-                            <input type="text" name="mobile" id="mobile" formControlName="mobile" placeholder="Mobile No" class="form-contol">
+                        <label for="mobile" class="col-md-3 col-form-label">Mobile:</label>
+                        <div class="col-md-9">
+                            <input type="text" name="mobile" id="mobile" formControlName="mobile"
+                                placeholder="Mobile No" class="form-control" [ngClass]="{'is-valid':signUp_mobileControl.valid 
+                                && (signUp_mobileControl.dirty || signUp_mobileControl.touched || isSignUpFormSubmitted),
+                                'is-invalid':signUp_mobileControl.invalid && (signUp_mobileControl.dirty || 
+                                signUp_mobileControl.touched || isSignUpFormSubmitted)}">
+                            <span class="text-danger" *ngIf="signUp_mobileControl?.errors?.['required'] && (signUp_mobileControl?.dirty 
+                             || signUp_mobileControl?.touched || isSignUpFormSubmitted)">Mobile no can't be
+                                blank</span>
+                            <span class="text-danger"
+                                *ngIf="signUp_mobileControl?.errors?.['pattern'] && 
+                             (signUp_mobileControl?.dirty || signUp_mobileControl?.touched || isSignUpFormSubmitted)">Mobile number is
+                                invalid</span>
                         </div>
                     </div>
                     <!--dateOfBirth-->
                     <div class="form-group form-row">
-                        <label for="dateOfBirth" class="col-md-4 col-form-label">Date Of Birth:</label>
-                        <div class="col-md-8">
-                            <input type="date" name="dateOfBirth" formControlName="dateOfBirth" id="dateOfBirth" placeholder="Date Of Birth" class="form-contol">
+                        <label for="dateOfBirth" class="col-md-3 col-form-label">Date Of Birth:</label>
+                        <div class="col-md-9">
+                            <input type="date" name="dateOfBirth" formControlName="dateOfBirth" id="dateOfBirth"
+                                placeholder="Date Of Birth" class="form-control" [ngClass]="{'is-valid':signUp_dateOfBirthControl.valid 
+                                && (signUp_dateOfBirthControl.dirty || signUp_dateOfBirthControl.touched || isSignUpFormSubmitted),
+                                'is-invalid':signUp_dateOfBirthControl.invalid && (signUp_dateOfBirthControl.dirty || 
+                                signUp_dateOfBirthControl.touched || isSignUpFormSubmitted)}">
+                            <span class="text-danger" *ngIf="signUp_dateOfBirthControl?.errors?.['required'] && (signUp_dateOfBirthControl?.dirty 
+                        || signUp_dateOfBirthControl?.touched || isSignUpFormSubmitted)">DOB can't be blank</span>
+                        <span class="text-danger" *ngIf="signUp_dateOfBirthControl?.errors?.['minAge'] && (signUp_dateOfBirthControl?.dirty 
+                        || signUp_dateOfBirthControl?.touched || isSignUpFormSubmitted)">Minimum age must be 18</span>
                         </div>
                     </div>
-                    {{signUpForm.value|json}}
-                </form>
-            </div>
-        </div>
-    </div>
 
+                    <!--Gender-->
+                    <div class="form-group form-row">
+                        <label for="gender" class="col-md-3 col-form-label">Gender:</label>
+                        <div class="col-md-9">
+                            <div class="form-check-label form-check-inline" *ngFor="let gender of genders">
+                                <input type="radio" name="gender" [value]="gender" formControlName="gender"
+                                    [id]="gender" class="form-check-input ">
+                                <label [for]="gender" class="form-check-input">{{gender}}</label>
+                            </div><br>
+                            <span class="text-danger" *ngIf="signUp_genderControl?.errors?.['required'] && (signUp_genderControl?.dirty 
+                        || signUp_genderControl?.touched || isSignUpFormSubmitted)">Gender can't be blank</span>
+                        </div>
+                        <!-- <div class="form-check-label form-check-inline">
+                            <input type="radio" name="gender" value="female" formControlName="gender"  id="female" class="form-check-input">
+                            <label for="female" class="form-check-input">Female</label>
+                        </div> -->
+                    </div>
+
+                    <!--country-->
+                    <div class="form-group form-row">
+                        <label for="countryId" class="col-md-3 col-form-label">Country:</label>
+                        <div class="col-md-9 ">
+                            <select name="countryId" formControlName="countryId" id="countryId" class="form-control"
+                                [ngClass]="{'is-valid':signUp_countryIdControl.valid 
+                            && (signUp_countryIdControl.dirty || signUp_countryIdControl.touched || isSignUpFormSubmitted),
+                            'is-invalid':signUp_countryIdControl.invalid && (signUp_countryIdControl.dirty || 
+                            signUp_countryIdControl.touched || isSignUpFormSubmitted)}">
+                                <option value="null">Please Select</option>
+                                <option *ngFor="let country of countries" [value]="country.countryId">
+                                    {{country.countryName}}</option>
+                            </select>
+                            <span class="text-danger" *ngIf="signUp_countryIdControl?.errors?.['required'] && (signUp_countryIdControl?.dirty 
+                            || signUp_countryIdControl?.touched || isSignUpFormSubmitted)">Country can't be
+                                blank</span>
+                        </div>
+                    </div>
+
+                    <!--password-->
+                    <div class="form-group form-row">
+                        <label for="password" class="col-md-3 col-form-label">Password:</label>
+                        <div class="col-md-9 ">
+                            <input type="password" name="password"
+                                id="password" formControlName="password" placeholder="Password"
+                                class="form-control" [ngClass]="{'is-valid':signUp_passwordControl.valid 
+                                && (signUp_passwordControl.dirty || signUp_passwordControl.touched || isSignUpFormSubmitted),
+                                'is-invalid':signUp_passwordControl.invalid && (signUp_passwordControl.dirty || 
+                                signUp_passwordControl.touched || isSignUpFormSubmitted)}">
+                                
+                                <span class="text-danger" *ngIf="signUp_passwordControl.errors?.['required'] && (signUp_passwordControl.dirty 
+                                || signUp_passwordControl.touched || isSignUpFormSubmitted)">Password can't be
+                                   blank</span>
+                                 
+
+                        </div>
+                    </div>
+
+                    <!--Confirm Password-->
+                    <div class="form-group form-row">
+                        <label for="confirmPassword" class="col-md-3 col-form-label">Confirm Password:</label>
+                        <div class="col-md-9 ">
+                            <input type="password" name="confirmPassword" placeholder="Confirm Password"
+                                id="confirmPassword" formControlName="confirmPassword"
+                                class="form-control" [ngClass]="{'is-valid':signUp_confirmPasswordControl.valid 
+                                && (signUp_confirmPasswordControl.dirty || signUp_confirmPasswordControl.touched || isSignUpFormSubmitted),
+                                'is-invalid':signUp_confirmPasswordControl.invalid && (signUp_confirmPasswordControl.dirty || 
+                                signUp_confirmPasswordControl.touched || isSignUpFormSubmitted)}">
+                                
+                                <span class="text-danger" *ngIf="signUp_confirmPasswordControl.errors?.['required'] && (signUp_confirmPasswordControl.dirty 
+                                || signUp_confirmPasswordControl.touched || isSignUpFormSubmitted)">Confirm Password can't be
+                                   blank</span>
+
+                                   <span class="text-danger" *ngIf="signUp_confirmPasswordControl.errors?.['compareValidator'] && (signUp_confirmPasswordControl.dirty 
+                                || signUp_confirmPasswordControl.touched || isSignUpFormSubmitted)">Confirm password and password should match </span>
+                                 
+
+                        </div>
+                    </div>
+
+                    <!--ReceivesNewsLetter-->
+                    <div class="form-group form-row">
+                        <label class="col-md-3 col-form-label"></label>
+                        <div class="col-md-9 ">
+                            &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="receivesNewsLetter"
+                                id="receivesNewsLetter" value="true" formControlName="receivesNewsLetter"
+                                class="form-check-input">
+                            <label for="receivesNewsLetter" class="form-check-label">Receives News Letter</label>
+                        </div>
+                    </div>
+                    <!--Skills-->
+                    <div class="form-group form-row">
+                        <label class="col-md-3 form-label">Skills:</label>
+                        <div class="col-md-9" formArrayName="skills">
+                            <div class="row" *ngFor="let skill of skillFormArray.controls; let i = index "
+                                [formGroupName]="i">
+                                <div class="col-sm-5">
+                                    <input type="text" name="skillName" id="skillName" formControlName="skillName"
+                                        placeholder="Skill Name" class="form-control" [ngClass]="{'is-valid':skill.get('skillName')?.valid 
+                                    && (skill.get('skillName')?.dirty || skill.get('skillName')?.touched || isSignUpFormSubmitted),
+                                    'is-invalid':skill.get('skillName')?.invalid && (skill.get('skillName')?.dirty || 
+                                    skill.get('skillName')?.touched || isSignUpFormSubmitted)}">
+                                    <span class="text-danger" *ngIf="skill.get('skillName')?.errors?.['required'] && (skill.get('skillName')?.dirty 
+                                     || skill.get('skillName')?.touched || isSignUpFormSubmitted)">Skill can't be
+                                        blank</span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select name="skillLevel" id="skillLevel" formControlName="skillLevel" class="form-control"
+                                        [ngClass]="{'is-valid':skill.get('skillLevel')?.valid 
+                                    && (skill.get('skillLevel')?.dirty || skill.get('skillLevel')?.touched || isSignUpFormSubmitted),
+                                    'is-invalid':skill.get('skillLevel')?.invalid && (skill.get('skillLevel')?.dirty || 
+                                    skill.get('skillLevel')?.touched || isSignUpFormSubmitted)}">
+                                        <option value="null">Please Select</option>
+                                        <option value="Beginner">Beginner</option>
+                                        <option value="Intermediate">Intermediate</option>
+                                        <option value="Professional">Professional</option>
+                                        <option value="Expert">Expert</option>
+                                    </select>
+                                    <span class="text-danger" *ngIf="skill.get('skillLevel')?.errors?.['required'] && (skill.get('skillLevel')?.dirty 
+                                    || skill.get('skillLevel')?.touched || isSignUpFormSubmitted)">Skill Level can't be
+                                        blank</span>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-danger"
+                                        (click)="onRemoveClick(i)">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="btn btn-primary" (click)="onAddSkill()" type="button">Add-Skill</button>
+                        </div>
+                    </div>
+
+                    {{signUpForm.value|json}}
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success float-right">Create Account</button>
+                    <span class="text-danger">{{registerError}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

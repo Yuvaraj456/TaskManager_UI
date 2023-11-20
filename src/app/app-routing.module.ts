@@ -6,6 +6,7 @@ import { ProjectsComponent } from './admin/projects/projects.component';
 import { LoginComponent } from './login/login.component';
 import { CanActivateGuardService } from './services/can-activate-guard.service';
 import { SignupComponent } from './componets/signup/signup.component';
+import { TaskComponent } from './componets/task/task.component';
 
 const routes: Routes = [
   {path:"projects",component:ProjectsComponent,canActivate:[CanActivateGuardService],data:{expectedRole:["Admin"]}},
@@ -13,8 +14,8 @@ const routes: Routes = [
   {path:"about",component:AboutComponent},
   {path:"login",component:LoginComponent},
   {path:"",redirectTo:"login",pathMatch:'full'}, 
-  {path:"signup",component:SignupComponent}
-    
+  {path:"signup",component:SignupComponent},
+  {path:"tasks",component:TaskComponent, canActivate:[CanActivateGuardService],data:{expectedRole:["Admin","Employee"]}}
 ];
 
 @NgModule({
