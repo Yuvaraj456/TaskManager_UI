@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ClientLocation } from 'src/app/models/client-location';
 import { Project } from 'src/app/models/project';
 import { ClientLocationService } from 'src/app/services/client-location.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 import * as $ from 'jquery';
+import { ProjectComponent } from '../project/project.component';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -21,11 +22,13 @@ export class ProjectsComponent implements OnInit {
    clientLocation:ClientLocation[] =[];
    showLoading:boolean=true;
 
-   searchBy:string = "ProjectId";
+   searchBy:string = "projectId";
    searchString:string = "";
 
-   @ViewChild("newForm") NewForm:NgForm|null=null; 
+   @ViewChild("newForm") NewForm:NgForm|null=null; //created instance of NgForm 
    @ViewChild("editForm") EditForm:NgForm|null=null; 
+
+
 
 
   constructor(private projectService:ProjectsService, private clientLocationService:ClientLocationService){
@@ -55,8 +58,14 @@ export class ProjectsComponent implements OnInit {
 
   }
 
+  
+  @ViewChild('newprjId') newprjId!:ElementRef;
   onNewClick(event:any)
   {
+    setTimeout(()=>{
+      this.newprjId.nativeElement.focus();
+    },100)
+    
     this.NewForm?.resetForm();
   }
 
@@ -97,7 +106,9 @@ export class ProjectsComponent implements OnInit {
   }
   }
 
-  onEditClick(event:any, index:number){
+  onEditClick(event:any){
+     let editEvent = event.event;
+     let index = event.index;
     this.EditForm?.resetForm();
     setTimeout(()=>{
       this.editProject.projectId = this.projects[index].projectId;
@@ -146,8 +157,11 @@ export class ProjectsComponent implements OnInit {
   }
   }
 
-  onDeleteClick(event:any,index:number)
+  onDeleteClick(event:any)
   {
+    let editEvent = event.event;
+     let index = event.index;
+
     this.deleteProject.projectId=this.projects[index].projectId;
     this.deleteProject.projectName=this.projects[index].projectName;
     this.deleteProject.dateOfStart=this.projects[index].dateOfStart;
@@ -182,5 +196,44 @@ export class ProjectsComponent implements OnInit {
       complete:()=>{}
     })
   }
+
+  // //@ViewChild('prj') prj!:ProjectComponent; //Sigle instance only
+  // @ViewChildren('prj') prj!:QueryList<ProjectComponent>; //Multiple instances
+  // onHideShowDetails(event:any)
+  // {
+  //   let projects = this.prj.toArray();
+  //   for(let i=0; i<projects.length;i++)
+  //   {
+  //     projects[i].toggleDetails();
+  //   }
+
+  // }
+
+  onHideShowDetails(event:any)
+  {
+    this.projectService.toggleDetails();
+  }
+
+
+
+  
+  isAllChecked:boolean = false;
+
+  @ViewChildren('prj') childComponent!:QueryList<ProjectComponent>;
+
+  isAllCheckedChange(event:any)
+  {
+
+    let child = this.childComponent.toArray();
+    for(let i=0;i<child.length;i++)
+    {
+      child[i].isAllCheckedChange(this.isAllChecked);
+    }
+  }
+
+
+
+
+
 
 }

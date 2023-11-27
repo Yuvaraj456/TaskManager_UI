@@ -11,6 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { TeamSizeValidatorDirective } from '../directives/team-size-validator.directive';
 import { ClientLocationStatusValidatorDirective } from '../directives/client-location-status-validator.directive';
 import { ProjectidUniqueValidatorDirective } from '../directives/projectid-unique-validator.directive';
+import { ProjectComponent } from './project/project.component';
+import { CheckBoxPrinterComponent } from './check-box-printer/check-box-printer.component';
+import { NumberToWordsPipe } from '../pipes/number-to-words.pipe';
+import { FilterPipe } from '../pipes/filter.pipe';
 
 
 
@@ -22,7 +26,11 @@ import { ProjectidUniqueValidatorDirective } from '../directives/projectid-uniqu
     ProjectsComponent,
     TeamSizeValidatorDirective,
     ClientLocationStatusValidatorDirective,
-    ProjectidUniqueValidatorDirective
+    ProjectidUniqueValidatorDirective,
+    ProjectComponent,
+    CheckBoxPrinterComponent,
+    NumberToWordsPipe,
+    FilterPipe
   ],
   imports: [ //all imports are Module
     CommonModule,

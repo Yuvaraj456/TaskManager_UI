@@ -7,19 +7,20 @@ import { LoginComponent } from './login/login.component';
 import { CanActivateGuardService } from './services/can-activate-guard.service';
 import { SignupComponent } from './componets/signup/signup.component';
 import { TaskComponent } from './componets/task/task.component';
+import AllowAnonymousService from './services/allow-anonymous.service';
 
 const routes: Routes = [
   {path:"projects",component:ProjectsComponent,canActivate:[CanActivateGuardService],data:{expectedRole:["Admin"]}},
   {path:"dashboard",component:DashboardComponent, canActivate:[CanActivateGuardService], data:{expectedRole:["Admin","Employee"]} },
-  {path:"about",component:AboutComponent},
-  {path:"login",component:LoginComponent},
+  {path:"about",component:AboutComponent, canActivate:[AllowAnonymousService]},
+  {path:"login",component:LoginComponent, canActivate:[AllowAnonymousService]},
   {path:"",redirectTo:"login",pathMatch:'full'}, 
-  {path:"signup",component:SignupComponent},
+  {path:"signup",component:SignupComponent, canActivate:[AllowAnonymousService]},
   {path:"tasks",component:TaskComponent, canActivate:[CanActivateGuardService],data:{expectedRole:["Admin","Employee"]}}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash:true})],
+  imports: [RouterModule.forRoot(routes,{useHash:true})], 
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

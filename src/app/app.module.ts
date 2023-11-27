@@ -13,9 +13,13 @@ import { SignupComponent } from './componets/signup/signup.component';
 import { TaskComponent } from './componets/task/task.component';
 
 
+
+
+
+
 @NgModule({
   declarations: [ //all component which is belongs to the current module
-    AppComponent, LoginComponent, SignupComponent, TaskComponent 
+    AppComponent, LoginComponent, SignupComponent, TaskComponent
   ],
   imports: [
     BrowserModule,

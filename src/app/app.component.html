@@ -7,25 +7,26 @@
     </button>
     <div class="collapse navbar-collapse" id="mynav">
         <ul class="navbar-nav mr-auto" >
-            <li class="nav-item" *ngIf="loginService.currentUserName != null">
+            <li class="nav-item" *ngIf="loginUser != null">
                 <a class="nav-link" routerLink="dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="about">About</a>
             </li>
-            <li class="nav-item" *ngIf="loginService.currentUserName != null">
+            
+            <li class="nav-item" *ngIf="loginUser != null">
                 <a class="nav-link" routerLink="projects">Projects</a>
             </li>
-            <li class="nav-item" *ngIf="loginService.currentUserName != null">
-                <a class="nav-link" href="">{{loginService.currentUserName }}</a>
+            <li class="nav-item" *ngIf="loginUser != null">
+                <a class="nav-link" >{{loginUser|slice:0:7}}</a>
             </li>
-            <li class="nav-item" *ngIf="loginService.currentUserName != null">
-                <a class="nav-link" href="#"  (click)="loginService.logout()">Logout</a>
+            <li class="nav-item" *ngIf="loginUser != null">
+                <a class="nav-link" href="#" (click)="onLogOutClick($event)">Logout</a>
             </li>
-            <li class="nav-item" *ngIf="loginService.currentUserName == null">
+            <li class="nav-item" *ngIf="loginUser == null">
                 <a class="nav-link" routerLink="login" >Login</a>
             </li>
-            <li class="nav-item" *ngIf="loginService.currentUserName == null">
+            <li class="nav-item" *ngIf="loginUser == null">
                 <a class="nav-link" routerLink="signup" >SignUp</a>
             </li>
             <!-- <li class="nav-item">

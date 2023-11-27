@@ -3,25 +3,34 @@
     <i class="fa fa-circle-o-notch fa-spin" style="font-size:34px" *ngIf="showLoading"></i>
 </h1>
 <div class="row">
-    <div class="col-xl-9 mx-auto">
+    <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
         <div class="form-group form-row">
             <div class="col-2">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#newModal"
-                    (click)="onNewClick($event)">Create Project</button>
+                    (click)="onNewClick($event)">Create Project</button>                     
             </div>
-            <label for="drpSearchBy" class="col-form-label col-2 text-right">Search By:</label>
-            <div class="col-3">
+            <div class="col-2">
+                <button class="btn btn-secondary " 
+                (click)="onHideShowDetails($event)">Hide/Show Details</button>
+            </div>  
+            <div class="col-1 custom-control custom-checkbox mt-2">
+                <input type="checkbox" value="true" name="isAllChecked" id="isAllChecked" style="width:40px;height:20px"
+                 [(ngModel)]="isAllChecked" class="custom-control-input" (change)="isAllCheckedChange($event)">
+                <label class="custom-control-label" for="isAllChecked"></label>
+            </div>             
+            <label for="drpSearchBy" class="col-form-label col-1 text-right">Search By:</label>
+            <div class="col-2">                 
                 <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
-                    <option value="ProjectId">Project ID</option>
-                    <option value="ProjectName">Project Name</option>
-                    <option value="DateOfStart">Date Of Start </option>
-                    <option value="TeamSize">Team Size</option>
-                    <option value="ClientLocation">Client Location</option>
-                    <option value="Status">Status</option>
+                    <option value="projectId">Project ID</option>
+                    <option value="projectName">Project Name</option>
+                    <option value="dateOfStart">Date Of Start </option>
+                    <option value="teamSize">Team Size</option>
+                    <option value="clientLocation">Client Location</option>
+                    <option value="status">Status</option>
 
                 </select>
             </div>
-            <label for="drpSearchString" class="col-form-label col-2 text-right">Search Text:</label>
+            <label for="drpSearchString" class="col-form-label col-1 text-right">Search:</label>
             <div class="col-3">
                 <div class="input-group">
                     <input type="text" class="form-control" id="drpSearchString" name="searchString"
@@ -33,38 +42,15 @@
             </div>
         </div>
     </div>
-    <div class="col-10 mx-auto">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Project ID</th>
-                    <th>Project Name</th>
-                    <th>Date Of Start</th>
-                    <th>Team Size</th>
-                    <th>Client Location</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let Project of projects; let i=index" [ngClass]="{'text-muted':!Project.active}">
-                    <td>{{Project.projectId}}</td>
-                    <td>{{Project.projectName}}</td>
-                    <td>{{Project.dateOfStart|date:'dd/MM/yyyy'}}</td>
-                    <td>{{Project.teamSize}}</td>
-                    <td>{{Project.clientLocation?.clientLocationName}}</td>
-                    <td>{{Project.status}}</td>
-
-
-                    <td>
-                        <button class="btn btn-warning me-2" (click)="onEditClick($event,i)" data-toggle="modal"
-                            data-target="#editModal">Edit</button>&nbsp;
-                        <button class="btn btn-danger " (click)="onDeleteClick($event,i)" data-toggle="modal"
-                            data-target="#deleteModal">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-11 mx-auto">
+        <div class="row">
+            <div class="col-md-4 mb-4" *ngFor="let project of projects | filter:searchBy:searchString; let i=index">
+                <app-project  #prj [eachProject]="project" [itemIndex]="i" 
+                (editClick)="onEditClick($event)"  (deleteClick)="onDeleteClick($event)">
+                <app-check-box-printer #selectBox> </app-check-box-printer>                        
+            </app-project>
+            </div>
+        </div>
     </div>
     <!--post model pop-up -->
     <form #newForm="ngForm" novalidate="novalidate" appClientLocationStatusValidator>
@@ -82,7 +68,7 @@
                             <div class="col-sm-8">
                                 <input type="text" id="txtNewProjectID" name="projectId" class="form-control w-50"
                                     placeholder="Project ID" [(ngModel)]="newProject.projectId" required="required"
-                                    #newProjectId="ngModel" pattern="^[0-9]*$" appProjectidUniqueValidator
+                                    #newProjectId="ngModel" pattern="^[0-9]*$" appProjectidUniqueValidator #newprjId
                                     [ngClass]="{'is-invalid':newProjectId.invalid &&
                                  (newProjectId.dirty || newProjectId.touched || newForm.submitted),
                                     'is-valid':newProjectId.valid &&(newProjectId.dirty || newProjectId.touched || newForm.submitted)}" />

@@ -2,13 +2,13 @@ import { ClientLocation } from "./client-location";
 
 export class Project {
 
-    projectId:number | null =null;
-    projectName:string | null=null;
-    dateOfStart:Date|null=null;
-    teamSize:number|null=null;
-    active:boolean|null=null;
-    status:string|null=null;
-    clientLocationId:number|null=null;
-    clientLocation:ClientLocation|null=null;
+    projectId:number | any =null;
+    projectName:string | any=null;
+    dateOfStart:Date|any=null;
+    teamSize:number|any=null;
+    active:boolean|any=null;
+    status:string|any=null; 
+    clientLocationId:number|any=null;
+    clientLocation:ClientLocation|any=null;
     
 }

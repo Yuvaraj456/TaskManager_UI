@@ -4,12 +4,13 @@ import { ActivatedRouteSnapshot, CanActivate, CanLoad, Router, RouterStateSnapsh
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as jwt_decode from 'jwt-decode';
+import { LoginUserService } from './login-user.service';
 @Injectable({
   providedIn: 'root'
 })
 export class CanActivateGuardService implements CanActivate{
 
-  constructor(private loginService:LoginService, private router:Router, private jwtHelperService:JwtHelperService) { }
+  constructor(private loginService:LoginService, private router:Router, private jwtHelperService:JwtHelperService, private loginUserService:LoginUserService) { }
 
   canActivate(route:ActivatedRouteSnapshot): boolean {
 
@@ -20,10 +21,14 @@ export class CanActivateGuardService implements CanActivate{
     
     if(this.loginService.isAuthenticated() && authRole.includes(jwtRole))
     {
+
+      this.loginUserService.onUserChange();
       return true; //the user can navigate to the particular route
     }
     else 
     {
+     
+      this.loginUserService.onUserChange();
       this.router.navigate(["/login"]);
       return false; //the user can't navigate to the particular route
     }

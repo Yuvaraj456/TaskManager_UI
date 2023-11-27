@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { LoginViewModel } from '../models/login-view-model';
+import { LoginUserService } from '../services/login-user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit{
   
     loginViewModel:LoginViewModel = new LoginViewModel();
     loginError:string|null=null;
+    @ViewChild("loginId") loginId!:ElementRef;
 
 
   constructor(private loginService:LoginService,private router:Router){
@@ -19,7 +21,8 @@ export class LoginComponent implements OnInit{
   }
   
   ngOnInit(): void {
-    
+
+    this.loginId.nativeElement.focus();    
   }
 
   onLoginClick(event:any){
@@ -28,6 +31,7 @@ export class LoginComponent implements OnInit{
       next:(response:any)=>{        
         sessionStorage.setItem("token",response.token);
         this.router.navigateByUrl("/dashboard");
+
       },
       error:(err)=>{
         console.log(err);

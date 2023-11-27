@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, Subject, map } from 'rxjs';
 import { Project } from '../models/project';
 import { DatePipe } from '@angular/common';
 
@@ -9,8 +9,19 @@ import { DatePipe } from '@angular/common';
 })
 export class ProjectsService {
 
-  constructor( private httpClient : HttpClient, private datePipe:DatePipe ) { 
 
+  public mySubject:BehaviorSubject<boolean>;
+
+  constructor( private httpClient : HttpClient, private datePipe:DatePipe ) { 
+    this.mySubject = new BehaviorSubject<boolean>(false);
+   
+  }
+
+
+
+  toggleDetails()
+  {
+    this.mySubject.next(!this.mySubject.value);
   }
 
   getAllProjects():Observable<Project[]>{ 
