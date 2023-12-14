@@ -15,7 +15,7 @@ export class LoginUserService implements OnInit {
 
    onUserChange()
    {
-    debugger;
+
     if(!this.jwtHelperService.isTokenExpired())
     {
       this.userSubject.next(sessionStorage.getItem('currentUserName'));

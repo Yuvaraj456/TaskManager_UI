@@ -61,7 +61,6 @@ export class CustomValidatorsService {
   {
     return (control:AbstractControl) : Observable<ValidationErrors|null>=> 
    {
-
     console.log(control.value);
       return this.loginService.getUserByEmail(control.value).pipe(map((response:any)=>
       {

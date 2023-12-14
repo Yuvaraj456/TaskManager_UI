@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Project } from '../models/project';
 
 @Pipe({
-  name: 'filter'
+  name: 'filter',
+  pure:false
 })
 export class FilterPipe implements PipeTransform {
 
@@ -14,8 +15,7 @@ export class FilterPipe implements PipeTransform {
     let resultArray:Project[]=[];
     
     for(let item of value)
-    {
-      debugger;
+    {      
       if(String(item[searchBy as keyof Project]).toLowerCase().indexOf(searchString.toLowerCase())>=0)
       {
         resultArray.push(item);

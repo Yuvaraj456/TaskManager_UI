@@ -12,10 +12,10 @@
         
     </div>
     <div class="card-body">
-        <table class="table table-borderless" [hidden]="hideDetails">
+        <table class="table table-borderless table-sm"  [hidden]="hideDetails">
             <tr>
                 <th>Date Of Start</th>
-                <td>{{project.dateOfStart}}</td>
+                <td>{{project.dateOfStart|date:'yyyy-MM-dd'}}</td>
             </tr>
             <tr>
                 <th>Team Size</th>
@@ -34,7 +34,9 @@
     <div class="card-footer">
         <button class="btn btn-info" (click)="onEditClick($event,index)" data-toggle="modal"
         data-target="#editModal">Edit</button>&nbsp;
-    <button class="btn btn-warning " (click)="onDeleteClick($event,index)" data-toggle="modal"
+    <button class="btn btn-warning" (click)="onDeleteClick($event,index)" data-toggle="modal"
         data-target="#deleteModal">Delete</button>
+        <a class="btn btn-primary" [routerLink]="['/admin','projects','view',project.projectId]" 
+        >Details...</a>
     </div>
 </div>

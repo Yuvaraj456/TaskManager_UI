@@ -6,6 +6,8 @@ import { ClientLocationService } from 'src/app/services/client-location.service'
 import { ProjectsService } from 'src/app/services/projects.service';
 import * as $ from 'jquery';
 import { ProjectComponent } from '../project/project.component';
+import { FilterPipe } from 'src/app/pipes/filter.pipe';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -19,7 +21,7 @@ export class ProjectsComponent implements OnInit {
    editIndex:any = null;
    deleteProject:Project = new Project();
    deleteIndex:any=null;
-   clientLocation:ClientLocation[] =[];
+   clientLocationObservable!:Observable<ClientLocation[]>;
    showLoading:boolean=true;
 
    searchBy:string = "projectId";
@@ -29,6 +31,9 @@ export class ProjectsComponent implements OnInit {
    @ViewChild("editForm") EditForm:NgForm|null=null; 
 
 
+   currentPageIndex:number = 0;
+   pages:any[]=[];
+   pageSize:number=3;
 
 
   constructor(private projectService:ProjectsService, private clientLocationService:ClientLocationService){
@@ -41,21 +46,36 @@ export class ProjectsComponent implements OnInit {
         
         this.projects = response
         this.showLoading=false;
+        this.calculateNoOfPages();
       },
       error:(error:any)=>{
         console.log(error);        
       }
   });
     
- this.clientLocationService.getClientLocations().subscribe({
-  next:(response:ClientLocation[])=>{
-    this.clientLocation = response;
-  },
-  error:(err)=>{console.log(err)},
-  complete:()=>{},
- });
+  this.clientLocationObservable= this.clientLocationService.getClientLocations();
 
 
+  }
+
+  calculateNoOfPages()
+  { 
+    let filterPipe = new FilterPipe();
+    let filteredPerson = filterPipe.transform(this.projects, this.searchBy, this.searchString);
+    let noOfPages = Math.ceil(filteredPerson.length/this.pageSize);
+
+    this.pages=[];
+    for(let i=0;i<noOfPages;i++)
+    {
+      this.pages.push({pageIndex:i});
+    }
+
+    this.currentPageIndex = 0;
+  }
+
+  onPageIndexClicked(pageIndex:number)
+  {
+    this.currentPageIndex = pageIndex;
   }
 
   
@@ -97,6 +117,7 @@ export class ProjectsComponent implements OnInit {
         this.newProject.clientLocationId=null;
 
         $('#newFormCancel').trigger('click')
+        this.calculateNoOfPages();
       },
       error:(error:any)=>{console.log(error);},
       complete:()=>{}
@@ -176,13 +197,22 @@ export class ProjectsComponent implements OnInit {
         this.projects.splice(this.deleteIndex,1);
         
         this.deleteProject.projectId = null;
-        this.deleteProject.projectName = null
-        this.deleteProject.dateOfStart = null
+        this.deleteProject.projectName = null;
+        this.deleteProject.dateOfStart = null;
         this.deleteProject.teamSize = null;
+
+        this.calculateNoOfPages();
       },
       error:(error:any)=>{ console.log(error)},
       complete:()=>{}
     })
+  }
+
+  onSearchTextKeyup(event:any)
+  {
+
+    this.calculateNoOfPages();
+
   }
 
   onSearchClick()
@@ -191,6 +221,7 @@ export class ProjectsComponent implements OnInit {
     this.projectService.searchProjects(this.searchBy,this.searchString).subscribe({
       next:(response:Project[])=>{
         this.projects = response;
+        
       },
       error:(error:any)=>{ console.log(error)},
       complete:()=>{}

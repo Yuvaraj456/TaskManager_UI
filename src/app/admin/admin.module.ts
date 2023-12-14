@@ -15,6 +15,10 @@ import { ProjectComponent } from './project/project.component';
 import { CheckBoxPrinterComponent } from './check-box-printer/check-box-printer.component';
 import { NumberToWordsPipe } from '../pipes/number-to-words.pipe';
 import { FilterPipe } from '../pipes/filter.pipe';
+import { PagingPipe } from '../pipes/paging.pipe';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { RouterModule } from '@angular/router';
+import { AdminRoutingModule } from './admin-routing/admin-routing.module';
 
 
 
@@ -30,12 +34,16 @@ import { FilterPipe } from '../pipes/filter.pipe';
     ProjectComponent,
     CheckBoxPrinterComponent,
     NumberToWordsPipe,
-    FilterPipe
+    FilterPipe,
+    PagingPipe,
+    ProjectDetailsComponent
   ],
   imports: [ //all imports are Module
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule,
+    AdminRoutingModule
   ],
   exports:[ //all exports are component
     DashboardComponent,
@@ -44,7 +52,8 @@ import { FilterPipe } from '../pipes/filter.pipe';
     ProjectsComponent,
     ClientLocationStatusValidatorDirective,
     TeamSizeValidatorDirective,
-    ProjectidUniqueValidatorDirective
+    ProjectidUniqueValidatorDirective,
+    ProjectDetailsComponent
   ],
   providers:[DashboardService, ProjectsService, DatePipe]//for service import
 })

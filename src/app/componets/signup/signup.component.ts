@@ -121,7 +121,7 @@ export class SignupComponent implements OnInit {
       this.loginService.Register(signupViewModel).subscribe({
         next:(response:any)=>{
           sessionStorage.setItem("token",response.token); 
-          this.router.navigateByUrl('/tasks');
+          this.router.navigate(['/employee','tasks']);
         },
         error:(err:any)=>{
           console.log(err);

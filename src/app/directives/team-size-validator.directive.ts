@@ -21,6 +21,7 @@ export class TeamSizeValidatorDirective implements Validator {
     }
     else
     {
+      debugger;
       return {divisible:{valid:false}} //invalid
     }
     

@@ -3,23 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './componets/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptorService } from './services/jwt-interceptor.service';
 import { JwtUnAuthorizedInterceptorService } from './services/jwt-un-authorized-interceptor.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SignupComponent } from './componets/signup/signup.component';
-import { TaskComponent } from './componets/task/task.component';
-
-
-
+import { AlertDirective } from './directives/alert.directive';
+import { RepeaterStructureDirective } from './directives/repeater-structure.directive';
+import { EmployeeModule } from './Employee/employee.module';
 
 
 
 @NgModule({
   declarations: [ //all component which is belongs to the current module
-    AppComponent, LoginComponent, SignupComponent, TaskComponent
+    AppComponent, LoginComponent, SignupComponent, AlertDirective, RepeaterStructureDirective
   ],
   imports: [
     BrowserModule,
@@ -35,7 +34,8 @@ import { TaskComponent } from './componets/task/task.component';
         }
        
       }
-    })
+    }),
+    EmployeeModule
   ],
   providers: [
     {

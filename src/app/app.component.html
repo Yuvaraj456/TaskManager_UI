@@ -8,17 +8,17 @@
     <div class="collapse navbar-collapse" id="mynav">
         <ul class="navbar-nav mr-auto" >
             <li class="nav-item" *ngIf="loginUser != null">
-                <a class="nav-link" routerLink="dashboard">Dashboard</a>
+                <a class="nav-link" [routerLink]="['/admin','dashboard']">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="about">About</a>
             </li>
             
             <li class="nav-item" *ngIf="loginUser != null">
-                <a class="nav-link" routerLink="projects">Projects</a>
+                <a class="nav-link" [routerLink]="['/admin','projects']">Projects</a>
             </li>
-            <li class="nav-item" *ngIf="loginUser != null">
-                <a class="nav-link" >{{loginUser|slice:0:7}}</a>
+            <li class="nav-item" *ngIf="loginUser != null" onclick="return false">
+                <a class="nav-link" href="#" >{{loginUser|slice:0:7}}</a>
             </li>
             <li class="nav-item" *ngIf="loginUser != null">
                 <a class="nav-link" href="#" (click)="onLogOutClick($event)">Logout</a>

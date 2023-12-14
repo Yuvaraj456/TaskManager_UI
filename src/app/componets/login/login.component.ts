@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
-import { LoginViewModel } from '../models/login-view-model';
-import { LoginUserService } from '../services/login-user.service';
+import { LoginViewModel } from '../../models/login-view-model';
+import { LoginUserService } from '../../services/login-user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import { LoginUserService } from '../services/login-user.service';
 export class LoginComponent implements OnInit{
   
     loginViewModel:LoginViewModel = new LoginViewModel();
-    loginError:string|null=null;
+    loginError!:string;
     @ViewChild("loginId") loginId!:ElementRef;
 
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
     this.loginService.login(this.loginViewModel).subscribe({
       next:(response:any)=>{        
         sessionStorage.setItem("token",response.token);
-        this.router.navigateByUrl("/dashboard");
+        this.router.navigate(['/admin','dashboard']);
 
       },
       error:(err)=>{

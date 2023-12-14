@@ -4,7 +4,9 @@
             <div class="card mt-4">
                 <div class="card-header bg-secondary text-white">
                     <h3>Login</h3>
+                    <div appAlert [error]="loginError" *ngIf="loginError"></div>  
                 </div>
+                                              
                 <div class="card-body">
                     <!--UserName-->
                     <div class="form-group form-row">
@@ -26,8 +28,10 @@
 
                 </div>
                 <div class="card-footer text-right">
-                    <span class="text-danger">{{loginError}}</span>
+                    <!-- <span class="text-danger">{{loginError}}</span> -->
                     <button class="btn btn-primary" (click)="onLoginClick($event)">Login</button>
+                    <!-- <div *appRepeaterStructure="let i">{{i}}</div> -->
+                    
                 </div>
             </div>
         </div>

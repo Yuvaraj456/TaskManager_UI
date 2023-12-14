@@ -63,7 +63,7 @@ export class LoginService {
 
       if(this.jwtHelperService.isTokenExpired())
       {
-        debugger;
+
         return false; //token is not valid
       }
       else{

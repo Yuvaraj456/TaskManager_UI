@@ -33,7 +33,7 @@
             <label for="drpSearchString" class="col-form-label col-1 text-right">Search:</label>
             <div class="col-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="drpSearchString" name="searchString"
+                    <input type="text" class="form-control" id="drpSearchString" (keyup)="onSearchTextKeyup($event)" name="searchString"
                         [(ngModel)]="searchString" />
                     <div class="input-group-append" (click)="onSearchClick()">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
@@ -44,13 +44,23 @@
     </div>
     <div class="col-11 mx-auto">
         <div class="row">
-            <div class="col-md-4 mb-4" *ngFor="let project of projects | filter:searchBy:searchString; let i=index">
+            <div class="col-md-4 mb-4 projectcard" *ngFor="let project of projects | filter:searchBy:searchString |paging :currentPageIndex:pageSize; let i=index">
                 <app-project  #prj [eachProject]="project" [itemIndex]="i" 
                 (editClick)="onEditClick($event)"  (deleteClick)="onDeleteClick($event)">
                 <app-check-box-printer #selectBox> </app-check-box-printer>                        
             </app-project>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="pagination justify-content-center mt-1">
+                    <li class="page-item" *ngFor="let page of pages" (click)="onPageIndexClicked(page.pageIndex)" [ngClass]="{'active':page.pageIndex == currentPageIndex}">
+                    <a href="#" onclick="return false" class="page-link">{{page.pageIndex+1}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </div>
     <!--post model pop-up -->
     <form #newForm="ngForm" novalidate="novalidate" appClientLocationStatusValidator>
@@ -69,7 +79,7 @@
                                 <input type="text" id="txtNewProjectID" name="projectId" class="form-control w-50"
                                     placeholder="Project ID" [(ngModel)]="newProject.projectId" required="required"
                                     #newProjectId="ngModel" pattern="^[0-9]*$" appProjectidUniqueValidator #newprjId
-                                    [ngClass]="{'is-invalid':newProjectId.invalid &&
+                                    [ngClass]="{'is-invalid':newProjectId.invalid && 
                                  (newProjectId.dirty || newProjectId.touched || newForm.submitted),
                                     'is-valid':newProjectId.valid &&(newProjectId.dirty || newProjectId.touched || newForm.submitted)}" />
                                 <span class="text-danger" *ngIf="newProjectId.invalid && (newProjectId.dirty || newProjectId.touched || newForm.submitted) && 
@@ -178,7 +188,7 @@
                             (newClientLocationId.dirty || newClientLocationId.touched || newForm.submitted),
                                'is-valid':newClientLocationId.valid &&(newClientLocationId.dirty || newClientLocationId.touched || newForm.submitted)}">
                                     <option value="null">Please Select</option>
-                                    <option *ngFor="let location of clientLocation" [value]="location.clientLocationId">
+                                    <option *ngFor="let location of clientLocationObservable|async" [value]="location.clientLocationId">
                                         {{location.clientLocationName}}</option>
                                 </select>
                                 <span class="text-danger" *ngIf="newClientLocationId.invalid && (newClientLocationId.dirty || newClientLocationId.touched || newForm.submitted) && 
@@ -322,7 +332,7 @@
                             (editClientLocationId.dirty || editClientLocationId.touched || editForm.submitted),
                                'is-valid':editClientLocationId.valid &&(editClientLocationId.dirty || editClientLocationId.touched || editForm.submitted)}">
                                     <option value="null">Please Select</option>
-                                    <option *ngFor="let location of clientLocation" value={{location.clientLocationId}}>
+                                    <option *ngFor="let location of clientLocationObservable |async" value={{location.clientLocationId}}>
                                         {{location.clientLocationName}}</option>
                                 </select>
                                 <span class="text-danger" *ngIf="editClientLocationId.invalid && (editClientLocationId.dirty || editClientLocationId.touched || editForm.submitted) && 
