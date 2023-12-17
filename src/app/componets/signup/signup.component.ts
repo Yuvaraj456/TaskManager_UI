@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Country } from 'src/app/models/country';
 import { LoginViewModel } from 'src/app/models/login-view-model';
 import { SignupViewModel } from 'src/app/models/signup-view-model';
+import { CanComponentDeactivated } from 'src/app/services/can-deactivate-guard.service';
 import { CountryService } from 'src/app/services/country.service';
 import { CustomValidatorsService } from 'src/app/services/custom-validators.service';
 import { LoginUserService } from 'src/app/services/login-user.service';
@@ -14,18 +15,20 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, CanComponentDeactivated {
   
   signUpForm!:FormGroup;
   genders:string[]=['Male','Female'];
   countries:Country[]=[];
   isSignUpFormSubmitted:boolean = false;
   registerError:string="";
+  canLeave: boolean = true;
   constructor(private countryService:CountryService, private formBuilder:FormBuilder, 
     private customValidator:CustomValidatorsService, private loginService:LoginService,
     private router:Router){
 
   }
+ 
 
   ngOnInit(): void {
 
@@ -66,6 +69,7 @@ export class SignupComponent implements OnInit {
     this.signUpForm.valueChanges.subscribe((value:any)=>
     {
       //console.log(value);
+      this.canLeave = false;
     });
   }
 
@@ -120,6 +124,7 @@ export class SignupComponent implements OnInit {
 
       this.loginService.Register(signupViewModel).subscribe({
         next:(response:any)=>{
+          this.canLeave = true;
           sessionStorage.setItem("token",response.token); 
           this.router.navigate(['/employee','tasks']);
         },

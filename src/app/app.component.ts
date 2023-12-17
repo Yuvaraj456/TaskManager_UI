@@ -5,11 +5,13 @@ import { LoginUserService } from './services/login-user.service';
 import { Subscription } from 'rxjs';
 import { RouterLoggerService } from './services/router-logger.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { fadeAnimation, keyFrameAnimation, slideLeftOrRightAnimation, slideUpAnimations, zoomLeftAnimation, zoomUpAnimation } from './Animations/my-animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations:[keyFrameAnimation]
 })
 export class AppComponent implements OnInit {
   title = "hello"
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.router.events.subscribe((event)=>{
+
       if(event instanceof NavigationEnd)
       {
         let userName = (this.loginUser)?this.loginUser:"anonymousUser";
@@ -47,6 +50,11 @@ export class AppComponent implements OnInit {
 onLogOutClick(event:any)
 {
   this.loginService.logout()
+}
+
+getState(outlet:any)
+{
+  return outlet.isActivated?outlet.activatedRoute.snapshot.url[0].path && outlet.activatedRouteData['linkIndex'] :"none";
 }
 
 ngOnDestroy()

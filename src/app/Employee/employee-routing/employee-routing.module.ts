@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 
   {path:"employee",canActivate:[CanActivateGuardService],data:{expectedRole:["Admin","Employee"]},children:[
-    {path:"tasks",component:TaskComponent}
+    {path:"tasks",component:TaskComponent, data:{linkIndex:1}}
   ]}
   
   

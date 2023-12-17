@@ -9,9 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 
   {path:"admin",canActivate:[CanActivateGuardService],data:{expectedRole:["Admin"]},children:[
-    {path:"projects",component:ProjectsComponent},
-    {path:"dashboard",component:DashboardComponent},
-    {path:"projects/view/:projectid",component:ProjectDetailsComponent}
+    {path:"projects",component:ProjectsComponent, data:{linkIndex:2}},
+    {path:"dashboard",component:DashboardComponent, data:{linkIndex:0}},
+    {path:"projects/view/:projectid",component:ProjectDetailsComponent,data:{linkIndex:3}}
   ]},  
   
 ];

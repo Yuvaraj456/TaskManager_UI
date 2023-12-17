@@ -13,7 +13,7 @@ import { SignupComponent } from './componets/signup/signup.component';
 import { AlertDirective } from './directives/alert.directive';
 import { RepeaterStructureDirective } from './directives/repeater-structure.directive';
 import { EmployeeModule } from './Employee/employee.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import { EmployeeModule } from './Employee/employee.module';
        
       }
     }),
-    EmployeeModule
+    EmployeeModule,
+  BrowserAnimationsModule    
   ],
   providers: [
     {
