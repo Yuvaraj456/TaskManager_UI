@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CanActivateGuardService } from 'src/app/services/can-activate-guard.service';
-import { ProjectsComponent } from '../projects/projects.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
-import { ProjectDetailsComponent } from '../project-details/project-details.component';
+import { CanActivateGuardService } from 'src/app/guards/can-activate-guard.service';
+import { ProjectsComponent } from '../components/projects/projects.component';
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { ProjectDetailsComponent } from '../components/project-details/project-details.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [

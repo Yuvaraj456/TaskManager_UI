@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Country } from 'src/app/models/country';
 import { LoginViewModel } from 'src/app/models/login-view-model';
 import { SignupViewModel } from 'src/app/models/signup-view-model';
-import { CanComponentDeactivated } from 'src/app/services/can-deactivate-guard.service';
+import { CanComponentDeactivated } from 'src/app/guards/can-deactivate-guard.service';
 import { CountryService } from 'src/app/services/country.service';
 import { CustomValidatorsService } from 'src/app/services/custom-validators.service';
 import { LoginUserService } from 'src/app/services/login-user.service';

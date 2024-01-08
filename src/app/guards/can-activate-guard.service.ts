@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from './login.service';
+import { LoginService } from '../services/login.service';
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as jwt_decode from 'jwt-decode';
-import { LoginUserService } from './login-user.service';
+import { LoginUserService } from '../services/login-user.service';
 @Injectable({
   providedIn: 'root'
 })
