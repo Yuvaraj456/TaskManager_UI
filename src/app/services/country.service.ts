@@ -14,4 +14,24 @@ export class CountryService {
   {
     return this.httpClient.get<Country[]>(`https://localhost:7015/api/Countries/GetCountries`,{responseType:"json"});
   }
+
+  getCountryById(countryId:number):Observable<Country>
+  {
+    return this.httpClient.get<Country>(`https://localhost:7015/api/Countries/GetByCountryId/${countryId}`,{responseType:"json"});
+  }
+
+  addCountry(country:Country):Observable<Country>
+  {
+    return this.httpClient.post<Country>(`https://localhost:7015/api/Countries/AddCountry`,country,{responseType:"json"});
+  }
+
+  updateCountry(country:Country):Observable<Country>
+  {
+    return this.httpClient.put<Country>(`https://localhost:7015/api/Countries/UpdateCountry`,country,{responseType:"json"});
+  }
+
+  deleteCountry(countryId:number|null|undefined):Observable<boolean>
+  {
+    return this.httpClient.delete<boolean>(`https://localhost:7015/api/Countries/DeleteCountry/${countryId}`,{responseType:"json"});
+  }
 }

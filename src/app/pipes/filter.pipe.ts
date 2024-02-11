@@ -1,18 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Project } from '../models/project';
 
+
 @Pipe({
   name: 'filter',
   pure:false
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: Project[], searchBy:string, searchString:string): any {
+  transform(value: any[], searchBy:string, searchString:string): any {
     
     if(value==null)
     return null;
 
-    let resultArray:Project[]=[];
+    let resultArray:any[]=[];
     
     for(let item of value)
     {      

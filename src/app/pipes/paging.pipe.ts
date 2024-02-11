@@ -11,13 +11,16 @@ export class PagingPipe implements PipeTransform {
     if(value == null)
     return null;
 
-    debugger;
     let resultArray:Project[]=[];
 
     for(let i=currentPageIndex*pageSize;i<(currentPageIndex+1)*pageSize;i++)
-    {      
+    {    
       if(value[i])
-      resultArray.push(value[i]);
+      {
+        
+        resultArray.push(value[i]); 
+      }
+      
     }
 
     return resultArray;

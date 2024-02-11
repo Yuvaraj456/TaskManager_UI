@@ -14,19 +14,23 @@ import { AlertDirective } from './directives/alert.directive';
 import { RepeaterStructureDirective } from './directives/repeater-structure.directive';
 import { EmployeeModule } from './Employee/employee.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
+import { AboutComponent } from './components/about/about.component';
+
+
 
 
 @NgModule({
   declarations: [ //all component which is belongs to the current module
-    AppComponent, LoginComponent, SignupComponent, AlertDirective, RepeaterStructureDirective
+    AppComponent, LoginComponent, SignupComponent, AlertDirective, RepeaterStructureDirective,
+    AboutComponent
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    AdminModule, //child module
-    ReactiveFormsModule,
+    AppRoutingModule,  
+    //AdminModule, //child module //lazy loaded that'snot needed in import of app module
+    SharedModule,
     JwtModule.forRoot({
       config:{
         tokenGetter:()=>{

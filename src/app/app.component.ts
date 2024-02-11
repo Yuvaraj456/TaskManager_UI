@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { LoginUserService } from './services/login-user.service';
 import { Subscription } from 'rxjs';
 import { RouterLoggerService } from './services/router-logger.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { fadeAnimation, keyFrameAnimation, slideLeftOrRightAnimation, slideUpAnimations, zoomLeftAnimation, zoomUpAnimation } from './Animations/my-animation';
 
 @Component({
@@ -12,6 +12,7 @@ import { fadeAnimation, keyFrameAnimation, slideLeftOrRightAnimation, slideUpAni
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations:[keyFrameAnimation]
+
 })
 export class AppComponent implements OnInit {
   title = "hello"

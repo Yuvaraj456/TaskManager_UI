@@ -1,12 +1,7 @@
 export class Country {
 
-    countryId?:number;
-    countryName?:string;
+    countryId?:number|null;
+    countryName?:string|null;
 
-    constructor(countryIdParam:number,coutryNameParam:string) {
-
-        this.countryId = countryIdParam;
-        this.countryName = coutryNameParam;
-    }
-
+    
 }

@@ -17,6 +17,9 @@
             <li class="nav-item" *ngIf="loginUser != null">
                 <a class="nav-link" [routerLink]="['/admin','projects']">Projects</a>
             </li>
+            <li class="nav-item" *ngIf="loginUser != null">
+                <a class="nav-link" [routerLink]="['/admin','masters']">Masters</a>
+            </li>
             <li class="nav-item" *ngIf="loginUser != null" onclick="return false">
                 <a class="nav-link" href="#" >{{loginUser|slice:0:7}}</a>
             </li>
